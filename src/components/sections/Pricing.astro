@@ -1,0 +1,83 @@
+---
+import { Check } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { planTerms, plans, plansFootnote } from "@/pricing";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="pricing" class="bg-paper" aria-labelledby="pricing-title">
+  <div class="mx-auto flex max-w-[1200px] flex-col gap-11 px-4 py-20 sm:px-6 md:py-24">
+    <div class="flex flex-col gap-4">
+      <SectionHeading id="pricing-title" eyebrow="PRICING" title="Simple monthly plans." />
+      <p class="max-w-[640px] text-[17px] leading-relaxed text-muted-foreground">
+        One monthly price covers building your software, hosting it and looking after it. Nothing to pay until it's
+        built and you're happy.
+      </p>
+    </div>
+
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
+      {
+        plans.map((plan) => (
+          <li class="flex">
+            <Card
+              className={cn(
+                "w-full gap-6 rounded-[14px] px-8 py-8 shadow-none",
+                plan.featured ? "border-0 ring-2 ring-burke-blue" : "border-0",
+              )}
+            >
+              <div class="flex flex-col gap-2">
+                <h3 class="text-[22px] font-bold">{plan.name}</h3>
+                <p class="text-[15px] leading-relaxed text-muted-foreground">{plan.summary}</p>
+              </div>
+              <p class="flex items-baseline gap-1">
+                <span class="font-heading text-5xl font-extrabold">${plan.price}</span>
+                <span class="text-base text-muted-foreground">/month</span>
+              </p>
+              <div class="flex flex-1 flex-col gap-6">
+                <div class="flex flex-col gap-2.5 rounded-[10px] bg-paper p-4">
+                  <p class="text-sm font-semibold">{plan.examples.heading}</p>
+                  <ul class="flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-muted-foreground marker:text-burke-blue">
+                    {plan.examples.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <ul class="flex flex-col gap-3">
+                  {plan.features.map((feature) => (
+                    <li class="flex gap-3 text-[15px] leading-relaxed">
+                      <Check className="mt-1 size-4 shrink-0 text-burke-blue" strokeWidth={3} aria-hidden="true" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a
+                href="#contact"
+                class={cn(
+                  buttonVariants({ variant: plan.featured ? "default" : "outline", size: "lg" }),
+                  plan.featured ? "" : "border-slate-300 bg-white hover:bg-paper",
+                )}
+              >
+                Start a project
+              </a>
+            </Card>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[15px] font-medium text-night">
+      {
+        planTerms.map((term) => (
+          <li class="flex items-center gap-2">
+            <Check className="size-4 shrink-0 text-burke-blue" strokeWidth={3} aria-hidden="true" />
+            {term}
+          </li>
+        ))
+      }
+    </ul>
+    <p class="-mt-6 text-center text-[15px] text-muted-foreground">{plansFootnote}</p>
+  </div>
+</section>
