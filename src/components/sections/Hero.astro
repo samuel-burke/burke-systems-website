@@ -2,12 +2,7 @@
 import { BadgeCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const steps = [
-  { label: "Picked and staged", status: "Done" },
-  { label: "Customer texted", status: "Auto" },
-  { label: "Report sent to manager", status: "Auto" },
-];
+import BusyworkDemo from "./BusyworkDemo.astro";
 ---
 
 <section class="bg-night" aria-labelledby="hero-title">
@@ -35,36 +30,6 @@ const steps = [
       </p>
     </div>
 
-    <figure
-      class="flex min-w-0 flex-[1_1_320px] flex-col gap-3.5 rounded-2xl border border-night-line bg-night-raised p-6"
-      aria-label="Example: an order workflow where most steps run automatically"
-    >
-      <div class="flex gap-[7px]" aria-hidden="true">
-        <span class="size-2.5 rounded-full bg-slate-600"></span>
-        <span class="size-2.5 rounded-full bg-slate-600"></span>
-        <span class="size-2.5 rounded-full bg-slate-600"></span>
-      </div>
-      <figcaption class="text-[13px] font-semibold text-periwinkle">TODAY'S ORDERS</figcaption>
-      <ul class="flex flex-col gap-3.5">
-        {
-          steps.map((step) => (
-            <li class="flex justify-between gap-4 rounded-[10px] bg-night px-4 py-3.5 text-[15px] text-white">
-              <span>{step.label}</span>
-              <span class="font-semibold text-periwinkle">{step.status}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <div
-        class="h-2 overflow-hidden rounded bg-night"
-        role="progressbar"
-        aria-label="Orders completed"
-        aria-valuenow="72"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div class="h-2 w-[72%] bg-burke-blue"></div>
-      </div>
-    </figure>
+    <BusyworkDemo />
   </div>
 </section>
