@@ -89,3 +89,36 @@ export const planTerms = [
 
 export const plansFootnote =
   "Want to own it outright? Buy it out whenever you like. Bigger projects get their own fixed quote.";
+
+export const pricingFaq: { question: string; answer: string }[] = [
+  {
+    question: "What does the monthly price cover?",
+    answer:
+      "Everything: building your software, hosting it, keeping it secure and backed up, fixing bugs and making the changes your plan includes. There's no separate build fee.",
+  },
+  {
+    question: "When do I start paying?",
+    answer:
+      "Not until your software is built and you're happy with it. If it isn't what you need, you don't pay.",
+  },
+  {
+    question: "What happens if I cancel?",
+    answer:
+      "You can cancel anytime. Your data is always yours, and you can export it before you go.",
+  },
+  {
+    question: "Can I own the software outright?",
+    answer:
+      "Yes. You can buy it out whenever you like, and then the monthly plan stops.",
+  },
+  {
+    question: "Which plan do I need?",
+    answer:
+      "Tell us what you want to fix and we'll recommend one. Most single automations fit Starter. A tool your team uses every day usually fits Standard.",
+  },
+  {
+    question: "What if my project is bigger than these plans?",
+    answer:
+      "Bigger projects get their own fixed quote, agreed before any work starts.",
+  },
+];
