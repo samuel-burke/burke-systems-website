@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: ./
+      target: dev
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./pnpm-workspace.yaml
+        - action: rebuild
+          path: ./pnpm-lock.yaml
+    ports:
+      - 4321:4321
