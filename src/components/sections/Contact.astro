@@ -1,0 +1,17 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { contactHref } from "@/site";
+---
+
+<section id="contact" class="bg-burke-blue" aria-labelledby="contact-title">
+  <div class="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-7 px-4 py-20 sm:px-6 md:py-22">
+    <div class="flex min-w-0 flex-[999_1_420px] flex-col gap-3">
+      <h2 id="contact-title" class="text-3xl leading-[1.1] font-extrabold text-balance text-white sm:text-4xl lg:text-[40px]">
+        Got a process that eats your week?
+      </h2>
+      <p class="text-lg leading-relaxed text-[#E6EBFD]">Tell us about it. The first conversation is free.</p>
+    </div>
+    <a href={contactHref} class={cn(buttonVariants({ size: "lg" }), "h-14 bg-white px-7 text-[17px] text-night hover:bg-paper")}>Book a free call</a>
+  </div>
+</section>

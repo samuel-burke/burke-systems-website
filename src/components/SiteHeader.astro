@@ -1,0 +1,57 @@
+---
+import { Menu } from "lucide-react";
+import Lockup from "@/components/brand/Lockup.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { navLinks } from "@/site";
+---
+
+<header class="sticky top-0 z-40 border-b border-white/10 bg-night">
+  <div class="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-4 py-4 sm:px-6 md:py-5">
+    <a href="/" aria-label="Burke Systems home" class="rounded-md">
+      <Lockup />
+    </a>
+
+    <nav aria-label="Main" class="hidden items-center gap-7 text-[15px] font-medium md:flex">
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="text-cloud transition-colors hover:text-white">
+            {link.label}
+          </a>
+        ))
+      }
+      <a href="/#contact" class={cn(buttonVariants({ size: "lg" }), "h-11 px-5 text-[15px]")}>Start a project</a>
+    </nav>
+
+    <details class="group relative md:hidden">
+      <summary
+        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-md text-white hover:bg-white/10 [&::-webkit-details-marker]:hidden"
+        aria-label="Menu"
+      >
+        <Menu className="size-6" aria-hidden="true" />
+      </summary>
+      <nav
+        aria-label="Main"
+        class="absolute top-full right-0 mt-2 flex w-60 flex-col gap-1 rounded-xl border border-night-line bg-night-raised p-2 shadow-xl"
+      >
+        {
+          navLinks.map((link) => (
+            <a href={link.href} class="rounded-md px-3 py-3 text-base font-medium text-cloud hover:bg-white/5 hover:text-white">
+              {link.label}
+            </a>
+          ))
+        }
+        <a href="/#contact" class={cn(buttonVariants({ size: "lg" }), "mt-1")}>Start a project</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Close the mobile menu after a link is picked.
+  document.querySelectorAll<HTMLDetailsElement>("header details").forEach((menu) => {
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => menu.removeAttribute("open"));
+    });
+  });
+</script>

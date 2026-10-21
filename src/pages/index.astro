@@ -1,17 +1,24 @@
 ---
-import Layout from '../layouts/layout.astro';
-
-import '../styles/pages.css';
-import '../styles/landing.css';
-
+import Layout from "@/layouts/layout.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import Hero from "@/components/sections/Hero.astro";
+import Services from "@/components/sections/Services.astro";
+import Process from "@/components/sections/Process.astro";
+import Work from "@/components/sections/Work.astro";
+import About from "@/components/sections/About.astro";
+import Contact from "@/components/sections/Contact.astro";
 ---
 
-<Layout title={"placeholder-title"} brand={"placeholder-brand"}>
-  <main id="main-content" class="main landing" tabindex="-1">
-    <header class="header">
-      <h1>"placeholder-title"</h1>
-    </header>
-
+<Layout>
+  <SiteHeader />
+  <main id="main-content" tabindex="-1">
+    <Hero />
+    <Services />
+    <Process />
+    <Work />
+    <About />
+    <Contact />
   </main>
+  <SiteFooter />
 </Layout>
-

@@ -1,11 +1,31 @@
-This boilerplate is meant to be bootstrapped with agent-scaffold. It's a template to create curriculum style sites.
+# burke.systems
 
-After bootstrapping a project, you can run it by...
+The Burke Systems marketing site. Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com) and [shadcn/ui](https://ui.shadcn.com), scaffolded with [agent-scaffold](https://github.com/freeCodeCamp/agent-scaffold).
 
-- Installing dependencies with `pnpm  i`
-- Run `pnpm dev` to start the dev server
+## Run it
 
-From there, you can:
+Node 26 and pnpm are required.
 
-- Go to the URL and go through the lessons to see the different lesson types
-- Change the content in `src/content/curriculum/english.md` to create your own lessons.
+```sh
+pnpm install
+pnpm dev        # http://localhost:4321
+pnpm build      # static site in dist/
+```
+
+Or in Docker: `docker compose up --watch`.
+
+## Add a shadcn component
+
+```sh
+pnpm dlx shadcn@latest add dialog
+```
+
+Components land in `src/components/ui/` and pick up the brand colors from `src/styles/globals.css`.
+
+## Before launch
+
+Placeholders are marked with `[brackets]` and `TODO` comments:
+
+- Contact email and phone in `src/site.ts`.
+- Headshot in `src/components/sections/About.astro`.
+- Project screenshots in `src/components/sections/Work.astro`.

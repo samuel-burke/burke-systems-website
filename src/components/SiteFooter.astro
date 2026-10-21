@@ -1,0 +1,24 @@
+---
+import Mark from "@/components/brand/Mark.astro";
+import { navLinks, site } from "@/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-night">
+  <div class="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-5 px-4 py-10 text-sm text-slate-400 sm:px-6">
+    <div class="flex items-center gap-3">
+      <Mark class="h-6.5 w-auto text-white" label={site.name} />
+      <p>© {year} {site.name} · {site.location}</p>
+    </div>
+    <nav aria-label="Footer" class="flex flex-wrap gap-6">
+      {
+        [...navLinks, { href: "/#contact", label: "Contact" }].map((link) => (
+          <a href={link.href} class="text-cloud hover:text-white">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</footer>

@@ -1,0 +1,22 @@
+---
+import { MARK_PATH, MARK_VIEWBOX } from "./mark-path";
+
+type Props = {
+  class?: string;
+  /** Accessible name. Leave empty when the mark sits next to the written name. */
+  label?: string;
+};
+
+const { class: className, label } = Astro.props;
+---
+
+<svg
+  viewBox={MARK_VIEWBOX}
+  class={className}
+  fill="currentColor"
+  role={label ? "img" : undefined}
+  aria-label={label || undefined}
+  aria-hidden={label ? undefined : "true"}
+>
+  <path fill-rule="evenodd" d={MARK_PATH}></path>
+</svg>

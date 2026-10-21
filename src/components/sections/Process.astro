@@ -1,0 +1,29 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+const steps = [
+  { title: "Listen", body: "We watch how the work gets done today and find where time is lost." },
+  { title: "Plan", body: "You get a clear scope, timeline and price before any code is written." },
+  { title: "Build", body: "Short cycles with working demos, so you see progress every week." },
+  { title: "Support", body: "We stay on after launch to fix, tune and grow what we built." },
+];
+---
+
+<section class="bg-white" aria-labelledby="process-title">
+  <div class="mx-auto flex max-w-[1200px] flex-col gap-11 px-4 py-20 sm:px-6 md:py-24">
+    <SectionHeading id="process-title" eyebrow="HOW IT WORKS" title="Simple process. No surprises." />
+    <ol class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-7">
+      {
+        steps.map((step, i) => (
+          <li class="flex flex-col gap-2.5 border-t-[3px] border-burke-blue pt-5">
+            <span class="font-heading text-[15px] font-bold text-burke-blue" aria-hidden="true">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3 class="text-xl font-bold">{step.title}</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground">{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
