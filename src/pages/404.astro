@@ -1,0 +1,40 @@
+---
+import Layout from "@/layouts/layout.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { MARK_PATH } from "@/components/brand/mark-path";
+
+// The mark split in two at the S channel: the "cable" between the two systems is cut.
+const SPLIT_Y = 250;
+---
+
+<Layout title="Page not found" description="This page got unplugged somewhere along the way.">
+  <SiteHeader />
+  <main id="main-content" tabindex="-1" class="bg-night">
+    <div class="mx-auto flex min-h-[70vh] max-w-[1200px] flex-col items-center justify-center gap-7 px-4 py-20 text-center sm:px-6">
+      <svg viewBox="130 90 256 332" class="h-auto w-36 text-burke-blue sm:w-44" aria-hidden="true">
+        <defs>
+          <clipPath id="mark-top"><rect x="100" y="0" width="320" height={SPLIT_Y}></rect></clipPath>
+          <clipPath id="mark-bottom"><rect x="100" y={SPLIT_Y} width="320" height="300"></rect></clipPath>
+        </defs>
+        <g transform="translate(-10 -14) rotate(-5 258 250)">
+          <path clip-path="url(#mark-top)" fill="currentColor" fill-rule="evenodd" d={MARK_PATH}></path>
+        </g>
+        <g transform="translate(10 14) rotate(4 258 250)">
+          <path clip-path="url(#mark-bottom)" fill="currentColor" fill-rule="evenodd" d={MARK_PATH}></path>
+        </g>
+      </svg>
+      <p class="font-heading text-6xl leading-none font-extrabold text-white">404</p>
+      <div class="flex max-w-[420px] flex-col gap-2.5">
+        <h1 class="text-2xl font-extrabold text-white sm:text-[26px]">Lost the connection.</h1>
+        <p class="text-base leading-relaxed text-cloud">
+          This page got unplugged somewhere along the way. Let's get you back to something that works.
+        </p>
+      </div>
+      <a href="/" class={cn(buttonVariants({ size: "lg" }), "h-13 px-6.5")}>Back to home</a>
+    </div>
+  </main>
+  <SiteFooter />
+</Layout>

@@ -1,0 +1,61 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const steps = [
+  { label: "Picked and staged", status: "Done" },
+  { label: "Customer texted", status: "Auto" },
+  { label: "Report sent to manager", status: "Auto" },
+];
+---
+
+<section class="bg-night" aria-labelledby="hero-title">
+  <div class="mx-auto flex max-w-[1200px] flex-wrap items-center gap-14 px-4 pt-14 pb-20 sm:px-6 md:pt-22 md:pb-28">
+    <div class="flex min-w-0 flex-[999_1_480px] flex-col gap-6">
+      <p class="text-[13px] font-semibold tracking-[0.18em] text-periwinkle">SOFTWARE · AUTOMATION · CONSULTING</p>
+      <h1 id="hero-title" class="text-4xl leading-[1.05] font-extrabold text-balance text-white sm:text-5xl lg:text-6xl">
+        Custom software that works the way your business does.
+      </h1>
+      <p class="max-w-[560px] text-lg leading-relaxed text-cloud sm:text-[19px]">
+        We build web apps, automations and integrations that cut busywork, so your team can spend its time on
+        customers instead of spreadsheets.
+      </p>
+      <div class="flex flex-wrap gap-3.5 pt-2">
+        <a href="#contact" class={cn(buttonVariants({ size: "lg" }), "h-13 px-6.5")}>Start a project</a>
+        <a href="#work" class={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-13 border-[1.5px] border-slate-600 bg-transparent px-6 text-white shadow-none hover:bg-white/5 hover:text-white")}>See our work</a>
+      </div>
+    </div>
+
+    <figure
+      class="flex min-w-0 flex-[1_1_320px] flex-col gap-3.5 rounded-2xl border border-night-line bg-night-raised p-6"
+      aria-label="Example: an order workflow where most steps run automatically"
+    >
+      <div class="flex gap-[7px]" aria-hidden="true">
+        <span class="size-2.5 rounded-full bg-slate-600"></span>
+        <span class="size-2.5 rounded-full bg-slate-600"></span>
+        <span class="size-2.5 rounded-full bg-slate-600"></span>
+      </div>
+      <figcaption class="text-[13px] font-semibold text-periwinkle">TODAY'S ORDERS</figcaption>
+      <ul class="flex flex-col gap-3.5">
+        {
+          steps.map((step) => (
+            <li class="flex justify-between gap-4 rounded-[10px] bg-night px-4 py-3.5 text-[15px] text-white">
+              <span>{step.label}</span>
+              <span class="font-semibold text-periwinkle">{step.status}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div
+        class="h-2 overflow-hidden rounded bg-night"
+        role="progressbar"
+        aria-label="Orders completed"
+        aria-valuenow="72"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div class="h-2 w-[72%] bg-burke-blue"></div>
+      </div>
+    </figure>
+  </div>
+</section>

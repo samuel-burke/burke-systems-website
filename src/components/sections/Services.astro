@@ -1,0 +1,46 @@
+---
+import { Code, MessageSquare, Repeat } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import SectionHeading from "./SectionHeading.astro";
+
+const services = [
+  {
+    icon: Code,
+    title: "Custom web apps",
+    body: "Tools built around how your team works: scheduling, tracking, customer portals, internal dashboards.",
+  },
+  {
+    icon: Repeat,
+    title: "Automation and integrations",
+    body: "Connect the apps you already pay for and stop copying data between them by hand.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Technical consulting",
+    body: "Not sure what to build or buy? We'll look at your process and give you a straight answer.",
+  },
+];
+---
+
+<section id="services" class="bg-paper" aria-labelledby="services-title">
+  <div class="mx-auto flex max-w-[1200px] flex-col gap-11 px-4 py-20 sm:px-6 md:py-24">
+    <SectionHeading id="services-title" eyebrow="WHAT WE DO" title="Three ways we help." />
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-5">
+      {
+        services.map((service) => (
+          <Card className="gap-3.5 rounded-[14px] border-0 py-8 shadow-none">
+            <CardHeader className="gap-3.5 px-8">
+              <service.icon className="size-8 text-burke-blue" strokeWidth={2} aria-hidden="true" />
+              <CardTitle className="font-heading text-[22px] leading-snug font-bold">
+                <h3>{service.title}</h3>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="px-8">
+              <p class="text-base leading-relaxed text-muted-foreground">{service.body}</p>
+            </CardContent>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Burke Systems brand tokens. Source of truth: the "Burke Systems Logo"
+ * design canvas (Brand guide artboard).
+ *
+ * The shadcn/ui variables below are mapped onto the brand palette so that
+ * components added with `pnpm dlx shadcn add <name>` pick up the brand
+ * automatically.
+ */
+:root {
+  /* Brand palette */
+  --burke-blue: #2b50e8;
+  --burke-blue-hover: #1c3bb8;
+  --night: #0f172a;
+  --night-raised: #1a2440;
+  --night-line: #2a3658;
+  --slate: #475569;
+  --mist: #dce3f7;
+  --paper: #f4f6fa;
+  --white: #ffffff;
+  --cloud: #c7d0e0; /* secondary text on Night */
+  --periwinkle: #8fa6f5; /* light blue accent on dark */
+  --status-green: #22c55e; /* domain-lockup dot only */
+
+  /* shadcn/ui theme */
+  --radius: 0.5rem;
+  --background: var(--white);
+  --foreground: var(--night);
+  --card: var(--white);
+  --card-foreground: var(--night);
+  --popover: var(--white);
+  --popover-foreground: var(--night);
+  --primary: var(--burke-blue);
+  --primary-foreground: var(--white);
+  --secondary: var(--paper);
+  --secondary-foreground: var(--night);
+  --muted: var(--paper);
+  --muted-foreground: var(--slate);
+  --accent: var(--mist);
+  --accent-foreground: var(--night);
+  --destructive: #dc2626;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: var(--burke-blue);
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Montserrat Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-burke-blue: var(--burke-blue);
+  --color-burke-blue-hover: var(--burke-blue-hover);
+  --color-night: var(--night);
+  --color-night-raised: var(--night-raised);
+  --color-night-line: var(--night-line);
+  --color-mist: var(--mist);
+  --color-paper: var(--paper);
+  --color-cloud: var(--cloud);
+  --color-periwinkle: var(--periwinkle);
+  --color-status-green: var(--status-green);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-heading;
+  }
+
+  ::selection {
+    background: var(--mist);
+    color: var(--night);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--burke-blue);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
