@@ -1,0 +1,48 @@
+---
+import { BadgeCheck, CircleDollarSign, Handshake } from "lucide-react";
+
+const points = [
+  {
+    icon: CircleDollarSign,
+    title: "Nothing up front",
+    body: "No deposit. You don't pay anything while we build.",
+  },
+  {
+    icon: Handshake,
+    title: "Pay when you're satisfied",
+    body: "Once it's built and working the way you need, you pay.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Not happy? Don't pay",
+    body: "If it doesn't do the job, you owe nothing for it.",
+  },
+];
+---
+
+<section id="guarantee" class="bg-white" aria-labelledby="guarantee-title">
+  <div class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6 md:pb-24">
+    <div class="flex flex-col gap-10 rounded-2xl bg-mist px-6 py-10 sm:px-10 md:py-14">
+      <div class="flex max-w-[680px] flex-col gap-3">
+        <p class="text-[13px] font-semibold tracking-[0.18em] text-burke-blue">100% SATISFACTION GUARANTEED</p>
+        <h2 id="guarantee-title" class="text-3xl leading-[1.1] font-extrabold text-balance sm:text-4xl lg:text-[40px]">
+          You only pay when you're happy with it.
+        </h2>
+        <p class="text-[17px] leading-relaxed text-muted-foreground">
+          We take on the risk, not you. The software gets built first, and you pay once it does what you need.
+        </p>
+      </div>
+      <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-5">
+        {
+          points.map((point) => (
+            <li class="flex flex-col gap-3 rounded-[14px] bg-white p-6">
+              <point.icon className="size-7 text-burke-blue" strokeWidth={2} aria-hidden="true" />
+              <h3 class="text-lg font-bold">{point.title}</h3>
+              <p class="text-[15px] leading-relaxed text-muted-foreground">{point.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

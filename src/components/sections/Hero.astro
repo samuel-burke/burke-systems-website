@@ -1,4 +1,5 @@
 ---
+import { BadgeCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +25,14 @@ const steps = [
         <a href="#contact" class={cn(buttonVariants({ size: "lg" }), "h-13 px-6.5")}>Start a project</a>
         <a href="#work" class={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-13 border-[1.5px] border-slate-600 bg-transparent px-6 text-white shadow-none hover:bg-white/5 hover:text-white")}>See our work</a>
       </div>
+      <p class="flex items-center gap-2 text-[15px] text-cloud">
+        <BadgeCheck className="size-5 shrink-0 text-periwinkle" aria-hidden="true" />
+        <span>
+          100% satisfaction guaranteed. <a href="#guarantee" class="text-white underline-offset-4 hover:underline"
+            >You only pay when you're happy.</a
+          >
+        </span>
+      </p>
     </div>
 
     <figure
