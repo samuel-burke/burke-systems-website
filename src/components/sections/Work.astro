@@ -1,23 +1,19 @@
 ---
+import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import SectionHeading from "./SectionHeading.astro";
 
-// TODO: swap the placeholder panels for real screenshots (put them in src/assets/work/).
+// TODO: swap the placeholder panel for a real screenshot (put it in src/assets/work/).
 const projects = [
   {
     kind: "WEB APP",
     title: "ShiftView",
     body: "A mobile-first scheduling app that shows retail fulfillment managers who is working, where, and when.",
+    url: "https://shiftview.app",
+    linkText: "shiftview.app",
     placeholder: "ShiftView screenshot",
     panel: "bg-night text-periwinkle",
-  },
-  {
-    kind: "WEBSITE",
-    title: "Family breeder site rebuild",
-    body: "A full redesign for a family-owned Golden Retriever breeder: faster, easier to update, and built for phones.",
-    placeholder: "Website screenshot",
-    panel: "bg-mist text-burke-blue-hover",
   },
 ];
 ---
@@ -25,19 +21,29 @@ const projects = [
 <section id="work" class="bg-paper" aria-labelledby="work-title">
   <div class="mx-auto flex max-w-[1200px] flex-col gap-11 px-4 py-20 sm:px-6 md:py-24">
     <SectionHeading id="work-title" eyebrow="RECENT WORK" title="Built for real teams." />
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5">
+    <div class="flex flex-col gap-5">
       {
         projects.map((project) => (
-          <Card className="gap-0 overflow-hidden rounded-[14px] border-0 py-0 shadow-none">
-            <div class={`flex h-60 items-center justify-center text-sm font-semibold ${project.panel}`}>
+          <Card className="gap-0 overflow-hidden rounded-[14px] border-0 py-0 shadow-none md:grid md:grid-cols-2">
+            <div class={`flex h-60 items-center justify-center text-sm font-semibold md:h-80 ${project.panel}`}>
               [{project.placeholder}]
             </div>
-            <div class="flex flex-col gap-2.5 p-7">
+            <div class="flex flex-col justify-center gap-2.5 p-7 md:p-10">
               <Badge variant="secondary" className="bg-transparent px-0 text-[13px] font-semibold text-burke-blue">
                 {project.kind}
               </Badge>
               <h3 class="text-[22px] font-bold">{project.title}</h3>
               <p class="text-base leading-relaxed text-muted-foreground">{project.body}</p>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener"
+                class="mt-2 inline-flex w-fit items-center gap-1 text-[15px] font-semibold text-burke-blue hover:text-burke-blue-hover hover:underline"
+              >
+                Visit {project.linkText}
+                <ArrowUpRight className="size-4" aria-hidden="true" />
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
             </div>
           </Card>
         ))
