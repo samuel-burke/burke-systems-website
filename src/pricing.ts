@@ -10,7 +10,7 @@ export type Plan = {
 export const plans: Plan[] = [
   {
     name: "Keep it running",
-    price: 25,
+    price: 50,
     summary:
       "For software that's done and just needs looking after. No changes included.",
     features: [
@@ -21,7 +21,7 @@ export const plans: Plan[] = [
   },
   {
     name: "Small changes",
-    price: 50,
+    price: 75,
     summary: "For teams that want small tweaks as they go.",
     features: [
       "Everything in Keep it running",
