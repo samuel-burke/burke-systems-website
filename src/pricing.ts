@@ -34,7 +34,7 @@ export const plans: Plan[] = [
   },
   {
     name: "Small changes",
-    price: 75,
+    price: 100,
     summary: "For tools your team uses every day.",
     features: [
       "Everything in Keep it running",
@@ -55,7 +55,7 @@ export const plans: Plan[] = [
   },
   {
     name: "Room to grow",
-    price: 100,
+    price: 200,
     summary: "For businesses adding automation over time.",
     features: [
       "Everything in Small changes",
