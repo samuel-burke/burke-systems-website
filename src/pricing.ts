@@ -11,11 +11,12 @@ export const plans: Plan[] = [
   {
     name: "Keep it running",
     price: 25,
-    summary: "For software that's done and just needs looking after.",
+    summary:
+      "For software that's done and just needs looking after. No changes included.",
     features: [
-      "Monitoring and alerts if something breaks",
+      "Uptime monitoring and alerts",
       "Security and software updates",
-      "Bug fixes",
+      "Backups checked",
     ],
   },
   {
@@ -24,7 +25,7 @@ export const plans: Plan[] = [
     summary: "For teams that want small tweaks as they go.",
     features: [
       "Everything in Keep it running",
-      "Small tweaks each month, like new fields, reports or wording",
+      "About 1 hour of small changes a month, like a new report, field or email rule",
     ],
     featured: true,
   },
@@ -34,15 +35,15 @@ export const plans: Plan[] = [
     summary: "For software that keeps growing with your business.",
     features: [
       "Everything in Small changes",
-      "Time each month for new features",
+      "About 3 hours a month for new features",
     ],
   },
 ];
 
 export const planTerms = [
-  "Month to month",
+  "Month to month, cancel anytime",
   "First month free",
-  "Cancel anytime",
+  "Bugs in our work fixed free",
   "The code is yours",
   "Extra work billed hourly",
 ];
