@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { planTerms, plans } from "@/pricing";
+import { planTerms, plans, plansFootnote } from "@/pricing";
 import SectionHeading from "./SectionHeading.astro";
 ---
 
@@ -12,8 +12,8 @@ import SectionHeading from "./SectionHeading.astro";
     <div class="flex flex-col gap-4">
       <SectionHeading id="pricing-title" eyebrow="PRICING" title="Simple monthly plans." />
       <p class="max-w-[640px] text-[17px] leading-relaxed text-muted-foreground">
-        Your software gets built first, and you pay for the build only when you're happy with it. After launch, pick a
-        plan to keep it running and improving.
+        Pick a plan to keep your software running and improving. Every plan covers the upkeep, and the bigger plans
+        cover more changes and new features each month.
       </p>
     </div>
 
@@ -35,14 +35,24 @@ import SectionHeading from "./SectionHeading.astro";
                 <span class="font-heading text-5xl font-extrabold">${plan.price}</span>
                 <span class="text-base text-muted-foreground">/month</span>
               </p>
-              <ul class="flex flex-1 flex-col gap-3">
-                {plan.features.map((feature) => (
-                  <li class="flex gap-3 text-[15px] leading-relaxed">
-                    <Check className="mt-1 size-4 shrink-0 text-burke-blue" strokeWidth={3} aria-hidden="true" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              <div class="flex flex-1 flex-col gap-6">
+                <ul class="flex flex-col gap-3">
+                  {plan.features.map((feature) => (
+                    <li class="flex gap-3 text-[15px] leading-relaxed">
+                      <Check className="mt-1 size-4 shrink-0 text-burke-blue" strokeWidth={3} aria-hidden="true" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div class="flex flex-col gap-2.5 rounded-[10px] bg-paper p-4">
+                  <p class="text-sm font-semibold">{plan.examples.heading}</p>
+                  <ul class="flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-muted-foreground marker:text-burke-blue">
+                    {plan.examples.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
               <a
                 href="#contact"
                 class={cn(
@@ -68,5 +78,6 @@ import SectionHeading from "./SectionHeading.astro";
         ))
       }
     </ul>
+    <p class="-mt-6 text-center text-[15px] text-muted-foreground">{plansFootnote}</p>
   </div>
 </section>

@@ -4,6 +4,8 @@ export type Plan = {
   price: number;
   summary: string;
   features: string[];
+  /** Concrete examples of the work the plan covers. */
+  examples: { heading: string; items: string[] };
   featured?: boolean;
 };
 
@@ -11,46 +13,69 @@ export const plans: Plan[] = [
   {
     name: "Keep it running",
     price: 50,
-    summary: "For software that's built and needs looking after.",
+    summary: "We keep what we built working.",
     features: [
-      "Uptime monitoring with alerts",
-      "Security and software updates",
-      "Daily backups",
+      "24/7 monitoring, so we hear about problems before you do",
+      "Security patches and software updates applied for you",
+      "Daily backups, checked monthly",
       "Bugs in our work fixed free",
-      "Monthly health report by email",
-      "1 hour of changes a month",
+      "Fixes when an outside service you rely on changes",
+      "A monthly health report",
       "Reply within 2 business days",
     ],
+    examples: {
+      heading: "Small tweaks included, like:",
+      items: [
+        "Editing an email template",
+        "Changing who gets a notification",
+        "Adjusting a schedule",
+      ],
+    },
   },
   {
     name: "Small changes",
     price: 75,
-    summary: "For teams that want regular tweaks as they go.",
+    summary: "For tools your team uses every day.",
     features: [
       "Everything in Keep it running",
-      "2 hours of changes a month",
       "Reply by the next business day",
-      "Unused hours roll over one month",
+      "Quiet month? It carries over to the next one",
     ],
+    examples: {
+      heading: "Changes as your business changes, like:",
+      items: [
+        "A new field on a form",
+        "A new column in a report",
+        "A new email or alert rule",
+        "A new user or role",
+        "A changed step in your workflow",
+      ],
+    },
     featured: true,
   },
   {
     name: "Room to grow",
     price: 100,
-    summary: "For software that keeps growing with your business.",
+    summary: "For businesses adding automation over time.",
     features: [
       "Everything in Small changes",
-      "3 hours of changes or new features a month",
       "Same-day reply on business days",
-      "Unused hours roll over one month",
-      "Optional monthly check-in call",
+      "Your requests go first in line",
+      "Optional monthly call to plan what's next",
     ],
+    examples: {
+      heading: "New work each month, like:",
+      items: [
+        "A new report",
+        "A new automation",
+        "A connection to another app, like QuickBooks or Google Sheets",
+        "A new page or screen",
+      ],
+    },
   },
 ];
 
-export const planTerms = [
-  "Pay for the build only when you're happy",
-  "Fixed price agreed up front",
-  "Cancel your plan anytime",
-  "The code is yours once it's paid for",
-];
+export const planTerms = ["Month to month", "Cancel your plan anytime"];
+
+export const plansFootnote =
+  "Bigger projects are quoted separately, at a fixed price, before any work starts.";
