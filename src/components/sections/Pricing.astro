@@ -1,9 +1,9 @@
 ---
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { planTerms, plans, plansFootnote } from "@/pricing";
+import { planTerms, plans, plansFootnote, pricingFaq } from "@/pricing";
 import SectionHeading from "./SectionHeading.astro";
 ---
 
@@ -79,5 +79,25 @@ import SectionHeading from "./SectionHeading.astro";
       }
     </ul>
     <p class="-mt-6 text-center text-[15px] text-muted-foreground">{plansFootnote}</p>
+
+    <div class="mx-auto flex w-full max-w-[760px] flex-col gap-4 pt-6">
+      <h3 class="text-center text-[22px] font-bold">Common questions</h3>
+      <div class="rounded-[14px] bg-white px-6">
+        {
+          pricingFaq.map((item) => (
+            <details class="group border-b border-border last:border-b-0">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-base font-semibold hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burke-blue [&::-webkit-details-marker]:hidden">
+                {item.question}
+                <ChevronDown
+                  className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p class="pb-5 text-[15px] leading-relaxed text-muted-foreground">{item.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>
