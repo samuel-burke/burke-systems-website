@@ -72,7 +72,7 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
       </div>
     </div>
     <div class="flex justify-between text-[12px] text-cloud">
-      <span>Time saved today</span>
+      <span>Time saved</span>
       <span data-saved data-minutes={startMinutes} class="tabular-nums">{formatMinutes(startMinutes)}</span>
     </div>
   </div>
@@ -138,6 +138,7 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
   }
 
   function formatMinutes(m: number) {
+    if (m >= WORKDAY_MINUTES) return "8h+";
     return `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`;
   }
 
@@ -216,8 +217,8 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
 
       tick(count, handled, handled + 1, String);
       handled += 1;
-      // Stop just short of a full workday so the bar never looks "finished".
-      const next = Math.min(WORKDAY_MINUTES - 5, saved + task.saved);
+      // Cap at a full workday; the label then reads "8h+".
+      const next = Math.min(WORKDAY_MINUTES, saved + task.saved);
       tick(savedLabel, saved, next, formatMinutes);
       saved = next;
       bar.style.width = `${(saved / WORKDAY_MINUTES) * 100}%`;
