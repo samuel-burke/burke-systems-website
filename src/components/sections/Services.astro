@@ -1,5 +1,5 @@
 ---
-import { Code, MessageSquare, Repeat } from "lucide-react";
+import { Code, MessageSquare, Palette, Repeat } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SectionHeading from "./SectionHeading.astro";
 
@@ -12,7 +12,12 @@ const services = [
   {
     icon: Repeat,
     title: "Automation and integrations",
-    body: "Connect the apps you already pay for and stop copying data between them by hand.",
+    body: "Connect the apps you already pay for and stop copying data between them by hand. Add an AI assistant that answers customer questions or sorts new requests.",
+  },
+  {
+    icon: Palette,
+    title: "Websites and branding",
+    body: "A logo, colors and a clear website that make your business look as good as its work, set up so customers can find you on Google and AI search.",
   },
   {
     icon: MessageSquare,
@@ -24,8 +29,8 @@ const services = [
 
 <section id="services" class="bg-paper" aria-labelledby="services-title">
   <div class="mx-auto flex max-w-[1200px] flex-col gap-11 px-4 py-20 sm:px-6 md:py-24">
-    <SectionHeading id="services-title" eyebrow="WHAT WE DO" title="Three ways we help." />
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-5">
+    <SectionHeading id="services-title" eyebrow="WHAT WE DO" title="Four ways we help." />
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {
         services.map((service) => (
           <Card className="gap-3.5 rounded-[14px] border-0 py-8 shadow-none">
