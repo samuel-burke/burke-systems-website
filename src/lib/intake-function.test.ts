@@ -67,7 +67,7 @@ describe("POST /api/intake", () => {
   });
 });
 
-describe("intake alert email", () => {
+describe("intake alerts", () => {
   const secrets = {
     RESEND_API_KEY: "re_test",
     INTAKE_NOTIFY_TO: "owner@example.com",
@@ -85,6 +85,21 @@ describe("intake alert email", () => {
     expect(body.to).toBe("owner@example.com");
     expect(body.reply_to).toBe("dana@example.com");
     expect(body.text).toContain("Invoices take all week.");
+  });
+
+  it("pushes to ntfy when a topic is set", async () => {
+    const calls: [string, RequestInit][] = [];
+    const fetcher = async (url: string, init: RequestInit) => {
+      calls.push([url, init]);
+      return new Response("{}");
+    };
+    await notify(
+      { NTFY_TOPIC_URL: "https://ntfy.sh/test-topic" },
+      valid,
+      fetcher as typeof fetch,
+    );
+    expect(calls.map(([url]) => url)).toEqual(["https://ntfy.sh/test-topic"]);
+    expect(calls[0][1].body).toContain("Invoices take all week.");
   });
 
   it("skips the email when the secrets aren't set", async () => {
