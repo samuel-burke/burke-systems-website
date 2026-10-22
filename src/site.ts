@@ -1,7 +1,7 @@
 // Site-wide details. Values in [brackets] are placeholders still to be filled in.
 export const site = {
   name: "Burke Systems",
-  url: "https://burke.systems",
+  url: "https://burke-systems-website.pages.dev",
   tagline: "Custom software for real business problems.",
   description:
     "Burke Systems builds web apps, automations and integrations for small and mid-size businesses in the Raleigh-Durham area and beyond.",
