@@ -18,5 +18,3 @@ export const navLinks = [
   { href: "/#pricing", label: "Pricing" },
   { href: "/#about", label: "About" },
 ];
-
-export const contactHref = `mailto:${site.email}`;

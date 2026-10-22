@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/layout.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+---
+
+<Layout title="Thanks" description="We got your message.">
+  <meta name="robots" content="noindex" slot="head" />
+  <SiteHeader />
+  <main id="main-content" tabindex="-1" class="bg-night">
+    <div class="mx-auto flex min-h-[70vh] max-w-[1200px] flex-col items-center justify-center gap-6 px-4 py-20 text-center sm:px-6">
+      <h1 class="text-4xl font-extrabold text-white sm:text-5xl">Thanks, we got it.</h1>
+      <p class="max-w-[480px] text-lg leading-relaxed text-cloud">
+        We'll read what you sent and reply by email within two business days.
+      </p>
+      <a href="/" class={cn(buttonVariants({ size: "lg" }), "h-12 px-6")}>Back to the home page</a>
+    </div>
+  </main>
+  <SiteFooter />
+</Layout>

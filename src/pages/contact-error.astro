@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/layout.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+---
+
+<Layout title="Something went wrong" description="Your message didn't send.">
+  <meta name="robots" content="noindex" slot="head" />
+  <SiteHeader />
+  <main id="main-content" tabindex="-1" class="bg-night">
+    <div class="mx-auto flex min-h-[70vh] max-w-[1200px] flex-col items-center justify-center gap-6 px-4 py-20 text-center sm:px-6">
+      <h1 class="text-4xl font-extrabold text-white sm:text-5xl">Your message didn't send.</h1>
+      <p class="max-w-[480px] text-lg leading-relaxed text-cloud">
+        Please check that your name, email and message are filled in, then try again.
+      </p>
+      <a href="/#contact" class={cn(buttonVariants({ size: "lg" }), "h-12 px-6")}>Try again</a>
+    </div>
+  </main>
+  <SiteFooter />
+</Layout>
