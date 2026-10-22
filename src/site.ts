@@ -2,9 +2,9 @@
 export const site = {
   name: "Burke Systems",
   url: "https://burke-systems-website.pages.dev",
-  tagline: "Custom software for real business problems.",
+  tagline: "Automation engineering for small business.",
   description:
-    "Burke Systems builds web apps, automations, integrations, websites and brands for small and mid-size businesses in the Raleigh-Durham area and beyond.",
+    "Burke Systems is an automation engineering shop for small and mid-size businesses in the Raleigh-Durham area. We build, test and run custom automations, integrations and web apps, plus websites and brands.",
   location: "Raleigh-Durham, NC",
   // TODO: replace with the real contact address before launch.
   email: "[email]",
