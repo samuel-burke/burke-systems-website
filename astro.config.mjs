@@ -9,7 +9,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   integrations: [react()],
 
-  site: "https://burke.systems",
+  // Link previews and canonical URLs are built from this. Switch to
+  // https://burke.systems once the domain points at Cloudflare Pages.
+  site: "https://burke-systems-website.pages.dev",
 
   prefetch: {
     // 'viewport' is quite an aggressive strategy.  'hover' could suffice, but we need to experiment.
