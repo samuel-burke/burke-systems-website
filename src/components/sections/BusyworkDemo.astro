@@ -2,17 +2,10 @@
 // The "Today's busywork" card in the hero: small-business chores that are easy
 // wins for automation, getting handled on their own. It renders as a still
 // picture first, then a small script plays it like a live feed: new tasks slide
-// in, each one finishes, and the counters tick up. People who ask their device
+// in and each one finishes. People who ask their device
 // for reduced motion keep the still picture.
 
-const rows = [
-  { label: "Invoice #1048 sent", saved: 10 },
-  { label: "Booking reminders sent", saved: 20 },
-  { label: "Timesheets reconciled", saved: 30 },
-];
-
-const startMinutes = 190;
-const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`;
+const rows = ["Invoice #1048 sent", "Booking reminders sent", "Timesheets reconciled"];
 ---
 
 <figure
@@ -28,19 +21,14 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
     </div>
   </div>
 
-  <div class="flex items-baseline justify-between gap-4" aria-hidden="true">
-    <figcaption class="text-[13px] font-semibold text-periwinkle">TODAY'S BUSYWORK</figcaption>
-    <span class="text-[13px] text-cloud">
-      <span data-count class="font-semibold text-white tabular-nums">41</span> tasks handled
-    </span>
-  </div>
+  <figcaption class="text-[13px] font-semibold text-periwinkle" aria-hidden="true">TODAY'S BUSYWORK</figcaption>
 
   <ul data-list class="relative flex h-[172px] flex-col gap-3.5 overflow-hidden" aria-hidden="true">
     {
       rows.map((row) => (
         <li class="order-row flex h-[48px] shrink-0 items-center justify-between gap-4 rounded-[10px] bg-night px-4 text-[15px] text-white">
           <span class="truncate" data-label>
-            {row.label}
+            {row}
           </span>
           <span class="status flex shrink-0 items-center gap-1.5 font-semibold text-periwinkle" data-status>
             <svg
@@ -55,27 +43,12 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
             >
               <path d="M20 6 9 17l-5-5" />
             </svg>
-            <span>{row.saved} min</span>
+            <span>Done</span>
           </span>
         </li>
       ))
     }
   </ul>
-
-  <div class="flex flex-col gap-2" aria-hidden="true">
-    <div class="h-2 overflow-hidden rounded bg-night">
-      <div
-        data-bar
-        class="h-2 bg-burke-blue transition-[width] duration-700 ease-out"
-        style={`width: ${(startMinutes / 480) * 100}%`}
-      >
-      </div>
-    </div>
-    <div class="flex justify-between text-[12px] text-cloud">
-      <span>Time saved</span>
-      <span data-saved data-minutes={startMinutes} class="tabular-nums">{formatMinutes(startMinutes)}</span>
-    </div>
-  </div>
 </figure>
 
 <template id="busywork-row-template">
@@ -109,23 +82,20 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
 </style>
 
 <script>
-  type Task = { label: (n: number) => string; saved: number };
-
-  // Chores most small businesses still do by hand, with rough minutes saved each time.
-  const TASKS: Task[] = [
-    { label: () => "New lead followed up", saved: 15 },
-    { label: (n) => `Invoice #${n} sent`, saved: 10 },
-    { label: () => "Low stock reordered", saved: 25 },
-    { label: () => "Late payment nudged", saved: 10 },
-    { label: () => "Receipts synced", saved: 20 },
-    { label: () => "Review request sent", saved: 5 },
-    { label: (n) => `Invoice #${n} sent`, saved: 10 },
-    { label: () => "Booking reminders sent", saved: 20 },
-    { label: () => "Weekly report emailed", saved: 30 },
-    { label: () => "Timesheets reconciled", saved: 30 },
+  // Chores most small businesses still do by hand.
+  const TASKS: ((invoice: number) => string)[] = [
+    () => "New lead followed up",
+    (n) => `Invoice #${n} sent`,
+    () => "Low stock reordered",
+    () => "Late payment nudged",
+    () => "Receipts synced",
+    () => "Review request sent",
+    (n) => `Invoice #${n} sent`,
+    () => "Booking reminders sent",
+    () => "Weekly report emailed",
+    () => "Timesheets reconciled",
   ];
 
-  const WORKDAY_MINUTES = 480;
   const ENTER_MS = 450;
   const RUN_MS = 1400;
   const REST_MS = 1300;
@@ -137,36 +107,17 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  function formatMinutes(m: number) {
-    if (m >= WORKDAY_MINUTES) return "8h+";
-    return `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m`;
-  }
-
-  function setDone(status: HTMLElement, text: string) {
+  function setDone(status: HTMLElement) {
     status.classList.replace("text-cloud", "text-periwinkle");
-    status.innerHTML = `${CHECK_ICON}<span>${text}</span>`;
+    status.innerHTML = `${CHECK_ICON}<span>Done</span>`;
     status.animate([{ transform: "scale(0.7)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], {
       duration: 260,
       easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
     });
   }
 
-  // Count a number up over half a second, formatting each frame.
-  function tick(el: HTMLElement, from: number, to: number, format: (n: number) => string) {
-    const start = performance.now();
-    const step = (now: number) => {
-      const t = Math.min(1, (now - start) / 500);
-      el.textContent = format(Math.round(from + (to - from) * t));
-      if (t < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
   function setup(root: HTMLElement) {
     const list = root.querySelector<HTMLElement>("[data-list]")!;
-    const count = root.querySelector<HTMLElement>("[data-count]")!;
-    const bar = root.querySelector<HTMLElement>("[data-bar]")!;
-    const savedLabel = root.querySelector<HTMLElement>("[data-saved]")!;
     const template = document.querySelector<HTMLTemplateElement>("#busywork-row-template")!;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -174,18 +125,16 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
     let running = false;
     let taskIndex = 0;
     let invoiceNumber = 1048;
-    let handled = Number(count.textContent) || 41;
-    let saved = Number(savedLabel.dataset.minutes) || 190;
 
     const canPlay = () => visible && !document.hidden && !reducedMotion.matches;
 
     async function addTask() {
-      const task = TASKS[taskIndex % TASKS.length];
+      const label = TASKS[taskIndex % TASKS.length];
       taskIndex += 1;
       invoiceNumber += 1;
 
       const row = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
-      row.querySelector("[data-label]")!.textContent = task.label(invoiceNumber);
+      row.querySelector("[data-label]")!.textContent = label(invoiceNumber);
       const status = row.querySelector<HTMLElement>("[data-status]")!;
 
       // Slide everything down one row, drop the oldest, and bring the new task in on top.
@@ -213,15 +162,7 @@ const formatMinutes = (m: number) => `${Math.floor(m / 60)}h ${String(m % 60).pa
       }
 
       await sleep(ENTER_MS + RUN_MS);
-      setDone(status, `${task.saved} min`);
-
-      tick(count, handled, handled + 1, String);
-      handled += 1;
-      // Cap at a full workday; the label then reads "8h+".
-      const next = Math.min(WORKDAY_MINUTES, saved + task.saved);
-      tick(savedLabel, saved, next, formatMinutes);
-      saved = next;
-      bar.style.width = `${(saved / WORKDAY_MINUTES) * 100}%`;
+      setDone(status);
     }
 
     async function loop() {
