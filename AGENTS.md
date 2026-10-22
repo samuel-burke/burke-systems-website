@@ -17,7 +17,7 @@ Marketing site for Burke Systems (burke.systems). Astro, static output, with Tai
 - `src/components/ui/`: shadcn/ui components. Treat them as vendored source.
 - `src/styles/globals.css`: brand palette and the shadcn theme variables mapped onto it.
 - `src/site.ts`: name, contact details, and nav links. Placeholders are in `[brackets]`.
-- `functions/`: Cloudflare Pages Functions. `functions/api/intake.ts` stores contact form submissions in the D1 database bound as `DB`. Don't put tests in `functions/`; every file there becomes a route.
+- `functions/`: Cloudflare Pages Functions. `functions/api/intake.ts` stores contact form submissions in the D1 database bound as `DB` and emails an alert through Resend when the `RESEND_API_KEY` and `INTAKE_NOTIFY_TO` secrets are set. Keep the owner's address in that secret, never in the repo. Don't put tests in `functions/`; every file there becomes a route.
 - `migrations/`: D1 schema. Apply new files with `wrangler d1 execute <database> --remote --file <file>`.
 
 ## shadcn/ui
