@@ -1,10 +1,11 @@
 ---
+import { Image } from "astro:assets";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import shiftview from "@/assets/work/shiftview.png";
 import SectionHeading from "./SectionHeading.astro";
 
-// TODO: swap the placeholder panel for a real screenshot (put it in src/assets/work/).
 const projects = [
   {
     kind: "WEB APP",
@@ -12,8 +13,8 @@ const projects = [
     body: "A mobile-first scheduling app that shows retail fulfillment managers who is working, where, and when.",
     url: "https://shiftview.app",
     linkText: "shiftview.app",
-    placeholder: "ShiftView screenshot",
-    panel: "bg-night text-periwinkle",
+    image: shiftview,
+    alt: "ShiftView's home page, with the team view and time clock shown on two phones.",
   },
 ];
 ---
@@ -25,9 +26,13 @@ const projects = [
       {
         projects.map((project) => (
           <Card className="gap-0 overflow-hidden rounded-[14px] border-0 py-0 shadow-none md:grid md:grid-cols-2">
-            <div class={`flex h-60 items-center justify-center text-sm font-semibold md:h-80 ${project.panel}`}>
-              [{project.placeholder}]
-            </div>
+            <Image
+              src={project.image}
+              alt={project.alt}
+              widths={[640, 960, 1280]}
+              sizes="(min-width: 1200px) 600px, (min-width: 768px) 50vw, 100vw"
+              class="h-full w-full bg-night object-cover"
+            />
             <div class="flex flex-col justify-center gap-2.5 p-7 md:p-10">
               <Badge variant="secondary" className="bg-transparent px-0 text-[13px] font-semibold text-burke-blue">
                 {project.kind}
