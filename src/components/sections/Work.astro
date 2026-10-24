@@ -19,8 +19,9 @@ const projects = [
 ];
 ---
 
+<!-- No bottom padding: Pricing below shares the background, so its top padding is the gap. -->
 <section id="work" class="bg-paper" aria-labelledby="work-title">
-  <div class="mx-auto flex max-w-[1200px] flex-col gap-11 px-4 py-20 sm:px-6 md:py-24">
+  <div class="mx-auto flex max-w-[1200px] flex-col gap-11 px-4 pt-20 sm:px-6 md:pt-24">
     <SectionHeading id="work-title" eyebrow="RECENT WORK" title="Check out previous work." />
     <div class="flex flex-col gap-5">
       {
@@ -30,6 +31,7 @@ const projects = [
               src={project.image}
               alt={project.alt}
               widths={[640, 960, 1280]}
+              loading="eager"
               sizes="(min-width: 1200px) 600px, (min-width: 768px) 50vw, 100vw"
               class="h-full w-full bg-night object-cover"
             />
