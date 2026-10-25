@@ -27,6 +27,15 @@ const ogImage = new URL("/og-image.png", Astro.site);
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#0F172A" />
+    <!-- Runs before first paint: the logo carves in once per session, so later loads mark it as seen. -->
+    <script is:inline>
+      try {
+        if (sessionStorage.getItem("bs-carve")) document.documentElement.classList.add("bs-seen");
+        else sessionStorage.setItem("bs-carve", "1");
+      } catch {
+        // Storage blocked: the carve plays on every load, which is harmless.
+      }
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />

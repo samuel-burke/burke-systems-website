@@ -117,6 +117,55 @@
   }
 }
 
+/* The logo carve, the same one samuelburke.dev plays. A plain B (only the two holes cut) covers the real mark; after
+   500ms a thick Night stroke, clipped to the S, carves the S's curve, then both layers drop away and the real mark is
+   left. Once per session (the head script in layout.astro adds .bs-seen on later loads). Under reduced motion the
+   mark is simply there. */
+.mark-holes,
+.mark-carve {
+  opacity: 0;
+}
+
+.mark-carve {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+@keyframes mark-hold {
+  from,
+  99.9% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mark-carve {
+  from {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+  99.9% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  to {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.bs-seen) .mark-holes {
+    animation: mark-hold 1250ms linear both;
+  }
+
+  html:not(.bs-seen) .mark-carve {
+    animation: mark-carve 750ms cubic-bezier(0.45, 0, 0.25, 1) 500ms both;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

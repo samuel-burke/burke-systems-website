@@ -1,13 +1,16 @@
 ---
+import { B_HOLES, S_CUT, S_SPINE } from "./carve-paths";
 import { MARK_PATH, MARK_VIEWBOX } from "./mark-path";
 
 type Props = {
   class?: string;
   /** Accessible name. Leave empty when the mark sits next to the written name. */
   label?: string;
+  /** Play the carve on the first page load of a session. Only for the header mark, which sits on Night. */
+  carve?: boolean;
 };
 
-const { class: className, label } = Astro.props;
+const { class: className, label, carve = false } = Astro.props;
 ---
 
 <svg
@@ -19,4 +22,24 @@ const { class: className, label } = Astro.props;
   aria-hidden={label ? undefined : "true"}
 >
   <path fill-rule="evenodd" d={MARK_PATH}></path>
+  {
+    carve && (
+      <g aria-hidden="true">
+        <clipPath id="mark-s-cut">
+          <path d={S_CUT} />
+        </clipPath>
+        <path class="mark-holes" fill-rule="evenodd" d={B_HOLES} />
+        <path
+          class="mark-carve"
+          d={S_SPINE}
+          pathLength="1"
+          clip-path="url(#mark-s-cut)"
+          fill="none"
+          stroke="var(--night)"
+          stroke-width="40"
+          stroke-linecap="round"
+        />
+      </g>
+    )
+  }
 </svg>
