@@ -6,7 +6,14 @@ import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
   {
-    ignores: ["dist/**", ".astro/**"],
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      "coverage/**",
+      "playwright-report/**",
+      "test-results/**",
+      ".wrangler/**",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

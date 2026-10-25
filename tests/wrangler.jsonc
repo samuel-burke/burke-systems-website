@@ -1,0 +1,13 @@
+// Test-only Wrangler config: lets `wrangler d1 execute --local` find the local D1 database
+// that `wrangler pages dev` uses in integration and E2E tests. Production bindings live in
+// the Cloudflare Pages dashboard, not here. Never run commands against this file with --remote.
+{
+  "name": "burke-systems-website-test",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "intake-test",
+      "database_id": "intake-test",
+    },
+  ],
+}
