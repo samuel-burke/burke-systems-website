@@ -4,14 +4,16 @@ import Mark from "./Mark.astro";
 // Primary stacked lockup: mark + BURKE over SYSTEMS, for Night backgrounds.
 type Props = {
   size?: "sm" | "md";
+  /** Play the logo carve (see Mark). */
+  carve?: boolean;
 };
 
-const { size = "md" } = Astro.props;
+const { size = "md", carve = false } = Astro.props;
 const small = size === "sm";
 ---
 
 <span class="inline-flex items-center gap-3 text-white">
-  <Mark class={small ? "h-6.5 w-auto" : "h-9 w-auto"} />
+  <Mark class={small ? "h-6.5 w-auto" : "h-9 w-auto"} carve={carve} />
   <span class="flex flex-col gap-[3px] font-heading leading-none">
     <span class={`${small ? "text-base" : "text-xl"} font-extrabold tracking-[0.04em]`}>BURKE</span>
     <span class={`${small ? "text-[6.5px]" : "text-[8px]"} font-semibold tracking-[0.36em] text-cloud`}>SYSTEMS</span>
