@@ -9,8 +9,8 @@ export const site = {
   // Pre-launch: the site invites early-access requests. Set to false once the business name is filed
   // to switch the wording to "Now taking our first clients."
   earlyAccess: true,
-  // TODO: replace with the real contact address before launch.
-  email: "[email]",
+  // Forwarded to Samuel's inbox by Cloudflare Email Routing.
+  email: "hello@burke.systems",
   // TODO: replace with the real phone number before launch.
   phone: "[phone]",
 };
