@@ -1,0 +1,4 @@
+# Lockfile is written by pnpm.
+pnpm-lock.yaml
+# Vendored agent skills; keep them byte-for-byte as published.
+.agents/

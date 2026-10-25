@@ -13,4 +13,5 @@ export const B_HOLES =
   "M213.452,300.848L292.548,300.848A21.652,21.652 0 0 1 292.548,344.152L213.452,344.152A21.652,21.652 0 0 1 213.452,300.848Z";
 
 // A centerline along the S from the top hole to the bottom one. Stroked thick and clipped to S_CUT, it carves the S.
-export const S_SPINE = "M210,190C209.5,215 211,236 232.8,250.5L255.4,262.3C272,273.5 280,287 280,312";
+export const S_SPINE =
+  "M210,190C209.5,215 211,236 232.8,250.5L255.4,262.3C272,273.5 280,287 280,312";
