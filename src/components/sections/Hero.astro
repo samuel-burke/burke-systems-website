@@ -2,12 +2,17 @@
 import { BadgeCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { site } from "@/site";
 import BusyworkDemo from "./BusyworkDemo.astro";
 ---
 
 <section class="bg-night" aria-labelledby="hero-title">
   <div class="mx-auto flex max-w-[1200px] flex-wrap items-center gap-14 px-4 pt-14 pb-20 sm:px-6 md:pt-22 md:pb-28">
     <div class="flex min-w-0 flex-[999_1_480px] flex-col gap-6">
+      <p class="flex w-fit items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-sm text-cloud">
+        <span class="size-1.5 rounded-full bg-periwinkle" aria-hidden="true"></span>
+        {site.earlyAccess ? "Opening soon. Request early access." : "Now taking our first clients."}
+      </p>
       <p class="text-[13px] font-semibold tracking-[0.18em] text-periwinkle">SOFTWARE · AUTOMATION · INTEGRATIONS</p>
       <h1 id="hero-title" class="text-4xl leading-[1.05] font-extrabold text-balance text-white sm:text-5xl lg:text-6xl">
         Custom software that works the way your business does.
@@ -17,7 +22,9 @@ import BusyworkDemo from "./BusyworkDemo.astro";
         spend its time on customers instead of spreadsheets.
       </p>
       <div class="flex flex-wrap gap-3.5 pt-2">
-        <a href="#contact" class={cn(buttonVariants({ size: "lg" }), "h-13 px-6.5")}>Start a project</a>
+        <a href="#contact" class={cn(buttonVariants({ size: "lg" }), "h-13 px-6.5")}>
+          {site.earlyAccess ? "Request early access" : "Start a project"}
+        </a>
         <a href="#work" class={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-13 border-[1.5px] border-slate-600 bg-transparent px-6 text-white shadow-none hover:bg-white/5 hover:text-white")}>See our work</a>
       </div>
       <p class="flex items-center gap-2 text-[15px] text-cloud">

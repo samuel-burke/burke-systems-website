@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { INTAKE_LIMITS } from "@/lib/intake";
+import { site } from "@/site";
 
 const label = "text-sm font-semibold text-night";
 const field = "h-11 bg-white text-base md:text-base";
@@ -17,6 +18,13 @@ const field = "h-11 bg-white text-base md:text-base";
       <p class="text-lg leading-relaxed text-[#E6EBFD]">
         Tell us about it. You don't pay anything until your software is finished and you're happy with it.
       </p>
+      {
+        site.earlyAccess && (
+          <p class="text-[15px] leading-relaxed text-[#E6EBFD]">
+            We're opening soon. Send an early-access request now and you'll be among our first clients.
+          </p>
+        )
+      }
       <p class="text-[15px] leading-relaxed text-[#E6EBFD]">We'll read it and reply by email within two business days.</p>
     </div>
 
@@ -70,7 +78,9 @@ const field = "h-11 bg-white text-base md:text-base";
         <label for="intake-website">Website</label>
         <input id="intake-website" name="website" type="text" tabindex="-1" autocomplete="off" />
       </div>
-      <Button type="submit" size="lg" className="h-12 w-full text-base sm:w-fit sm:px-8">Send</Button>
+      <Button type="submit" size="lg" className="h-12 w-full text-base sm:w-fit sm:px-8">
+        {site.earlyAccess ? "Request early access" : "Send"}
+      </Button>
     </form>
   </div>
 </section>
