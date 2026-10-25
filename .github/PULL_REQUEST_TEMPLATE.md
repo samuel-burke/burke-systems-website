@@ -8,7 +8,7 @@
 
 ## Type
 
-- [ ] Task PR (`feature/`, `bugfix/`, `chore/`, `docs/`, `test/`, `refactor/`, `site/`, `claude/`) -> `dev`
+- [ ] Task PR (`feature/`, `bugfix/`, `chore/`, `docs/`, `test/`, `refactor/`, `site/`) -> `dev`
 - [ ] Release PR: `dev` -> `main` (**merging deploys to production**)
 - [ ] Approved emergency hotfix: `hotfix/*` -> `main` (label `emergency-hotfix`)
 

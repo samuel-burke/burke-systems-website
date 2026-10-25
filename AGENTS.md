@@ -447,7 +447,7 @@ Integration and E2E tests run the built site in `wrangler pages dev` with a thro
 
 ### Project-specific additions to the general rules
 
-- **Branch prefixes.** Besides the Section 3 prefixes, PRs into `dev` may come from `site/*` (content and design work, the owner's existing convention), `claude/*` (Claude Code session branches) and `dependabot/*`. `.github/workflows/branch-flow.yml` enforces this.
+- **Branch prefixes.** Besides the Section 3 prefixes, PRs into `dev` may come from `site/*` (content and design work, the owner's existing convention) and `dependabot/*`. AI agents use the same prefixes as everyone else (usually `chore/`, `feature/` or `bugfix/`). `.github/workflows/branch-flow.yml` enforces this.
 - **Coverage scope.** The Vitest thresholds (90% lines, statements and functions; 85% branches) apply to `src/lib/**` and `functions/**`, the logic unit tests can reach. `.astro` pages and sections are covered by the E2E suite, `src/components/ui/` is vendored, and brand paths and pricing are static data.
 - **Deployment.** Cloudflare Pages' Git integration is the only deploy mechanism. A merge into `main` deploys to production right away; every other branch gets a preview at `<branch>.burke-systems-website.pages.dev`. GitHub Actions never deploys. See [docs/ci-cd.md](docs/ci-cd.md).
 - **Formatting.** Prettier has no config file, so it checks `.ts`, `.json`, `.md` and `.yml` files but skips `.astro` files. Changing that would reformat every page; it needs its own PR.

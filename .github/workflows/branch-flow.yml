@@ -43,9 +43,9 @@ jobs:
           fi
 
           if [[ "$BASE_REF" == "dev" ]]; then
-            # Standard prefixes from AGENTS.md, plus this project's site/* (content and design work),
-            # claude/* (Claude Code session branches) and dependabot/* (dependency updates).
-            if [[ "$HEAD_REF" =~ ^(feature|bugfix|refactor|chore|docs|test|hotfix|site|claude)/[a-z0-9][a-z0-9-]*$ ]] \
+            # Standard prefixes from AGENTS.md, plus this project's site/* (content and design work)
+            # and dependabot/* (dependency updates).
+            if [[ "$HEAD_REF" =~ ^(feature|bugfix|refactor|chore|docs|test|hotfix|site)/[a-z0-9][a-z0-9-]*$ ]] \
               || [[ "$HEAD_REF" =~ ^dependabot/[A-Za-z0-9._/-]+$ ]]; then
               echo "Approved branch flow: task branch -> dev."
               exit 0
