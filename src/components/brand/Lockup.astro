@@ -16,6 +16,8 @@ const small = size === "sm";
   <Mark class={small ? "h-6.5 w-auto" : "h-9 w-auto"} carve={carve} />
   <span class="flex flex-col gap-[3px] font-heading leading-none">
     <span class={`${small ? "text-base" : "text-xl"} font-extrabold tracking-[0.04em]`}>BURKE</span>
+    {/* Flex drops this space visually; it keeps the text "BURKE SYSTEMS" so it matches link labels (SC 2.5.3). */}
+    {" "}
     <span class={`${small ? "text-[6.5px]" : "text-[8px]"} font-semibold tracking-[0.36em] text-cloud`}>SYSTEMS</span>
   </span>
 </span>

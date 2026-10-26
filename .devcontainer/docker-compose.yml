@@ -5,11 +5,11 @@ services:
       target: dev
     command: ["sleep", "infinity"]
     volumes:
-    # First mount the source
+      # First mount the source
       - type: bind
         source: ..
         target: /app
         consistency: cached
-    # Then mount an anonymous volume to hold node_modules. Otherwise the bind mount causes the host node_modules to be used.
+      # Then mount an anonymous volume to hold node_modules. Otherwise the bind mount causes the host node_modules to be used.
       - type: volume
         target: /app/node_modules
