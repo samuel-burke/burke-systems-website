@@ -1,16 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
-  "dockerComposeFile": [
-    "./docker-compose.yml"
-  ],
+  "dockerComposeFile": ["./docker-compose.yml"],
   "service": "devcontainer",
   "workspaceFolder": "/app",
   "customizations": {
     "vscode": {
-      "extensions": [
-        "astro-build.astro-vscode",
-        "Anthropic.claude-code"
-      ]
+      "extensions": ["astro-build.astro-vscode", "Anthropic.claude-code"]
     }
   }
 }

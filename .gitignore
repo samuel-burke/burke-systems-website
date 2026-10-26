@@ -23,3 +23,12 @@ pnpm-debug.log*
 # OS
 .DS_Store
 
+
+# Wrangler local state and secrets for `wrangler pages dev`
+.wrangler/
+.dev.vars*
+
+# Test output
+coverage/
+playwright-report/
+test-results/

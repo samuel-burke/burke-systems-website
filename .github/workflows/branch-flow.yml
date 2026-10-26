@@ -1,0 +1,58 @@
+# Enforces the branch flow in AGENTS.md: task branches -> dev -> main.
+# Reads only branch names and labels; it never checks out or runs PR code.
+name: Branch flow
+
+on:
+  pull_request:
+    branches: [dev, main]
+    types: [opened, reopened, synchronize, edited, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-branch-flow:
+    name: Validate branch flow
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check source and target branches
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "$BASE_REF" == "main" ]]; then
+            if [[ "$HEAD_REF" == "dev" ]]; then
+              echo "Approved branch flow: dev -> main release PR."
+              exit 0
+            fi
+
+            # This label is an explicit exception marker, NOT a substitute
+            # for required human review and branch protection settings.
+            if [[ "$HEAD_REF" =~ ^hotfix/[a-z0-9][a-z0-9-]*$ ]] && [[ ",$PR_LABELS," == *,emergency-hotfix,* ]]; then
+              echo "Emergency hotfix route allowed; owner review still required."
+              exit 0
+            fi
+
+            echo "::error::PRs into main must come from dev, except owner-approved labeled hotfix/* PRs."
+            exit 1
+          fi
+
+          if [[ "$BASE_REF" == "dev" ]]; then
+            # Standard prefixes from AGENTS.md, plus this project's site/* (content and design work)
+            # and dependabot/* (dependency updates).
+            if [[ "$HEAD_REF" =~ ^(feature|bugfix|refactor|chore|docs|test|hotfix|site)/[a-z0-9][a-z0-9-]*$ ]] \
+              || [[ "$HEAD_REF" =~ ^dependabot/[A-Za-z0-9._/-]+$ ]]; then
+              echo "Approved branch flow: task branch -> dev."
+              exit 0
+            fi
+            echo "::error::PRs into dev must come from a short-lived task branch (feature/, bugfix/, chore/, site/, ...)."
+            exit 1
+          fi
+
+          echo "::error::Unexpected target branch: $BASE_REF"
+          exit 1

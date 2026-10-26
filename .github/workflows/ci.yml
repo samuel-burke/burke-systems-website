@@ -1,0 +1,117 @@
+# Quality gates for every PR into dev or main, and for pushes to those branches.
+# Deployment is not done here: Cloudflare Pages builds and deploys from its own Git
+# integration (see docs/ci-cd.md). This workflow must never deploy or hold deploy secrets.
+name: CI
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches: [dev, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  ASTRO_TELEMETRY_DISABLED: "1"
+  WRANGLER_SEND_METRICS: "false"
+
+jobs:
+  quality:
+    name: Lint, format and types
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+          package-manager-cache: false
+      - name: Install pnpm (version from package.json)
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm typecheck
+
+  unit:
+    name: Unit tests and coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+          package-manager-cache: false
+      - name: Install pnpm (version from package.json)
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
+      - run: pnpm install --frozen-lockfile
+      # Fails when coverage drops below the thresholds in vitest.config.ts.
+      - run: pnpm test:coverage
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ github.run_id }}
+          path: coverage/
+          if-no-files-found: error
+          retention-days: 14
+
+  build-and-e2e:
+    name: Build, integration and E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+          package-manager-cache: false
+      - name: Install pnpm (version from package.json)
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      # Both suites run the built site in Wrangler with a throwaway local D1 database.
+      # No Cloudflare account, token or secret is used.
+      - run: pnpm test:integration
+      - run: pnpm test:e2e
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ github.run_id }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+          package-manager-cache: false
+      - name: Install pnpm (version from package.json)
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
+      # Reads the lockfile only. Fails on any high or critical advisory, dev dependencies included.
+      - run: pnpm audit --audit-level high

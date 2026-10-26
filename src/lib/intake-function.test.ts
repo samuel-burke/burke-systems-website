@@ -59,6 +59,52 @@ describe("POST /api/intake", () => {
     expect(DB.rows).toEqual([]);
   });
 
+  it("sends a body that isn't form data to the error page instead of crashing", async () => {
+    const DB = fakeDb();
+    const request = new Request("https://example.com/api/intake", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(valid),
+    });
+    const response = await onRequestPost({ request, env: { DB } });
+    expect(response.status).toBe(303);
+    expect(response.headers.get("location")).toBe(
+      "https://example.com/contact-error",
+    );
+    expect(DB.rows).toEqual([]);
+  });
+
+  it("shows the error page when the insert fails", async () => {
+    const DB = {
+      prepare: () => ({
+        bind: () => ({
+          run: async () => {
+            throw new Error("D1 unavailable");
+          },
+        }),
+      }),
+    };
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    const response = await onRequestPost({ request: post(valid), env: { DB } });
+    error.mockRestore();
+    expect(response.headers.get("location")).toBe(
+      "https://example.com/contact-error",
+    );
+  });
+
+  it("hands the alerts to waitUntil so the visitor isn't kept waiting", async () => {
+    const DB = fakeDb();
+    const pending: Promise<unknown>[] = [];
+    const response = await onRequestPost({
+      request: post(valid),
+      env: { DB },
+      waitUntil: (promise) => pending.push(promise),
+    });
+    expect(response.headers.get("location")).toBe("https://example.com/thanks");
+    expect(pending).toHaveLength(1);
+    await Promise.all(pending);
+  });
+
   it("shows the error page when the database isn't bound", async () => {
     const response = await onRequestPost({ request: post(valid), env: {} });
     expect(response.headers.get("location")).toBe(

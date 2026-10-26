@@ -99,7 +99,10 @@ export async function notify(
 
 export async function onRequestPost(context: Context) {
   const { request, env } = context;
-  const result = parseIntake(await request.formData());
+  // A body that isn't form data (wrong content type, garbled) would otherwise throw and return a 500.
+  const form = await request.formData().catch(() => null);
+  if (!form) return redirect(request, "/contact-error");
+  const result = parseIntake(form);
 
   // Pretend spam succeeded so bots don't retry.
   if (!result.ok)
