@@ -1,11 +1,16 @@
 # Changelog
 
-Notable changes to the burke.systems site. Entries describe what was actually merged. Versions and dates are added only when a release PR from `dev` into `main` is merged.
+Notable changes to the burke.systems site. Entries describe what was actually merged. Each release gets its version and planned date on a branch into `dev`, before the release PR from `dev` into `main`; a release is shipped only once that PR is merged.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-26
+
+First tracked release. Everything before it shipped straight to `main` and has no changelog entries.
+
 ### Added
 
+- The Contact section shows the email address hello@burke.systems with a button that copies it.
 - Engineering workflow from the AI Engineering Starter Kit: `AGENTS.md` policy with project-specific context, `CONTRIBUTING.md`, PR and issue templates, architecture, CI/CD and data-inventory docs, ADRs, and a kickoff audit.
 - GitHub Actions CI on PRs and pushes to `dev` and `main`: format, lint, type check, unit tests with coverage thresholds, build, integration and E2E tests, and a dependency audit.
 - Branch-flow check: PRs into `main` must come from `dev` (or an approved `hotfix/*`), and PRs into `dev` from a task branch.

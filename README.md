@@ -3,7 +3,7 @@
 <!--
 CI badges go here once .github/workflows/ci.yml has run on both branches and each
 URL below has been opened and checked (AGENTS.md Section 17). Not added yet: the
-workflow has not run on GitHub, and the dev branch does not exist yet.
+workflow has run on dev but not yet on main (it first runs there when 0.1.0 is merged).
 
 [![CI · dev](https://github.com/samuel-burke/burke-systems-website/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/samuel-burke/burke-systems-website/actions/workflows/ci.yml?query=branch%3Adev)
 [![CI · main](https://github.com/samuel-burke/burke-systems-website/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/samuel-burke/burke-systems-website/actions/workflows/ci.yml?query=branch%3Amain)
