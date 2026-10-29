@@ -39,6 +39,42 @@ for (const path of ["/", "/thanks", "/contact-error"]) {
   });
 }
 
+test("the Work section lists each project with a working image and link @readonly @mobile", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const work = page.locator("section#work");
+  const projects = [
+    {
+      title: "ShiftView",
+      link: "Visit shiftview.app",
+      href: "https://shiftview.app",
+    },
+    {
+      title: "Study Squad",
+      link: "See the code on GitHub",
+      href: "https://github.com/samuel-burke/study-squad-root-app",
+    },
+  ];
+  await expect(work.getByRole("heading", { level: 3 })).toHaveText(
+    projects.map((p) => p.title),
+  );
+  for (const project of projects) {
+    const link = work.getByRole("link", { name: project.link });
+    await expect(link).toHaveAttribute("href", project.href);
+    await expect(link).toHaveAttribute("target", "_blank");
+  }
+  const images = work.locator("img");
+  await expect(images).toHaveCount(projects.length);
+  for (const image of await images.all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect(image).toHaveAttribute("alt", /\S/);
+    await expect
+      .poll(() => image.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+});
+
 test("an unknown page returns the 404 page @readonly", async ({ page }) => {
   const response = await page.goto("/no-such-page");
   expect(response?.status()).toBe(404);
