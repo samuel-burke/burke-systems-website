@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import shiftview from "@/assets/work/shiftview.png";
+import studySquad from "@/assets/work/study-squad.png";
 import SectionHeading from "./SectionHeading.astro";
 
 const projects = [
@@ -12,9 +13,18 @@ const projects = [
     title: "ShiftView",
     body: "A mobile-first scheduling app that shows retail fulfillment managers who is working, where, and when.",
     url: "https://shiftview.app",
-    linkText: "shiftview.app",
+    linkText: "Visit shiftview.app",
     image: shiftview,
     alt: "ShiftView's home page, with the team view and time clock shown on two phones.",
+  },
+  {
+    kind: "COMMUNITY APP",
+    title: "Study Squad",
+    body: "A group study timer for Root communities. Everyone shares one countdown, sets a goal, and takes breaks together, with streaks and XP that keep people coming back.",
+    url: "https://github.com/samuel-burke/study-squad-root-app",
+    linkText: "See the code on GitHub",
+    image: studySquad,
+    alt: "Study Squad's focus room: a shared 25-minute timer, eight members and their goals, a weekly boss, and a combo meter.",
   },
 ];
 ---
@@ -25,13 +35,13 @@ const projects = [
     <SectionHeading id="work-title" eyebrow="RECENT WORK" title="Check out previous work." />
     <div class="flex flex-col gap-5">
       {
-        projects.map((project) => (
+        projects.map((project, index) => (
           <Card className="gap-0 overflow-hidden rounded-[14px] border-0 py-0 shadow-none md:grid md:grid-cols-2">
             <Image
               src={project.image}
               alt={project.alt}
               widths={[640, 960, 1280]}
-              loading="eager"
+              loading={index === 0 ? "eager" : "lazy"}
               sizes="(min-width: 1200px) 600px, (min-width: 768px) 50vw, 100vw"
               class="h-full w-full bg-night object-cover"
             />
@@ -47,7 +57,7 @@ const projects = [
                 rel="noopener"
                 class="mt-2 inline-flex w-fit items-center gap-1 text-[15px] font-semibold text-burke-blue hover:text-burke-blue-hover hover:underline"
               >
-                Visit {project.linkText}
+                {project.linkText}
                 <ArrowUpRight className="size-4" aria-hidden="true" />
                 <span class="sr-only">(opens in a new tab)</span>
               </a>
