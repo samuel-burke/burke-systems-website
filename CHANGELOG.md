@@ -4,6 +4,8 @@ Notable changes to the burke.systems site. Entries describe what was actually me
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-29
+
 ### Added
 
 - The Work section shows Study Squad, a group study timer for Root communities, with a link to its code on GitHub.
